@@ -11,6 +11,11 @@
         <v-btn text @click="loginAsGuest">Entrar como visitante</v-btn>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="showMessage">
+      {{ message }}
+      <v-btn text @click="showMessage = false">Fechar</v-btn>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -19,16 +24,23 @@ export default {
   name: "LoginPage",
   data() {
     return {
-      token: ""
+      token: "",
+      message: "",
+      showMessage: false
     };
   },
   methods: {
     login() {
-      this.$store.commit("setAuthToken", this.token);
+      if (this.token) {
+        this.$store.commit("setAuthToken", this.token);
+        this.$router.push("/book");
+      } else {
+        this.message = "Você deve informar um Token!";
+        this.showMessage = true;
+      }
     },
     loginAsGuest() {
-      //TODO
-      alert(this.$store.state.authToken);
+      this.$router.push("/book");
     }
   }
 };
