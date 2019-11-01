@@ -1,13 +1,24 @@
 <template>
   <v-app>
-    <router-view></router-view>
+    <app-header />
+
+    <v-content>
+      <router-view />
+    </v-content>
+
+    <feedback />
   </v-app>
 </template>
 
 <script>
-// AIzaSyA4YMQe-WqHf3XUdDspDLSPtCOEMUcha_c
+import Feedback from "./components/feedback/Feedback.vue";
+import AppHeader from "./components/header/AppHeader.vue";
 
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Feedback,
+    AppHeader
+  }
 };
 </script>
